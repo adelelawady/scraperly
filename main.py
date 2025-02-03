@@ -15,7 +15,7 @@ def process_lexica_results(freeflo_results):
     
     for attempt in range(max_retries):
         try:
-            lexica_scraper = LexicaScraper(image_limit=2, headless=HEADLESS_MODE)
+            lexica_scraper = LexicaScraper(image_limit=10, headless=HEADLESS_MODE)
             
             # Process each FreeFlo style
             for style in freeflo_results:
@@ -36,7 +36,7 @@ def process_lexica_results(freeflo_results):
                     lexica_results = lexica_scraper.search_and_scrape(search_query)
                     
                     # Get up to 2 related images from Lexica results
-                    for lexica_item in lexica_results[:2]:
+                    for lexica_item in lexica_results[:10]:
                         image_data = {
                             "src": lexica_item['image_url'],
                             "alt": style_name,
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     scraper = FreefloScraper(headless=HEADLESS_MODE)
     try:
         # Example search term
-        results = scraper.search_and_scrape("neon urban")
+        results = scraper.search_and_scrape("adventure video game immersive quests fantasy adventure game")
         scraper.save_results()
         style_scraper = FreefloStyleScraper(headless=HEADLESS_MODE)
         style_scraper.scrape_from_results()
