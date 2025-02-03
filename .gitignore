@@ -47,7 +47,7 @@ geckodriver.exe
 # OS specific
 .DS_Store
 Thumbs.db
-desktop.ini 
+desktop.ini
 
 
 
@@ -80,3 +80,7 @@ style-gallery-explorer-main/*.sw?
 
 # Explicitly allow lib directory in style-gallery-explorer-main
 !style-gallery-explorer-main/src/lib/
+
+# Results
+freeflo_results.json
+combined_results.json
