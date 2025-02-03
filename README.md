@@ -20,8 +20,8 @@ A Python-based web scraping tool that collects art style information and example
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/ai-art-style-scraper.git
-   cd ai-art-style-scraper
+   git clone https://github.com/adelelawady/art.git
+   cd art
    ```
 
 2. Create and activate a virtual environment:
@@ -37,10 +37,6 @@ A Python-based web scraping tool that collects art style information and example
    ```bash
    pip install -r requirements.txt
    ```
-
-4. Download the appropriate WebDriver for your browser:
-   - [ChromeDriver](https://sites.google.com/chromium.org/driver/)
-   - [GeckoDriver](https://github.com/mozilla/geckodriver/releases) (for Firefox)
 
 ## Usage
 
