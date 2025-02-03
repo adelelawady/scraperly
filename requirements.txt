@@ -1,0 +1,10 @@
+# Web Scraping
+selenium>=4.10.0
+beautifulsoup4>=4.12.0
+
+# Utility
+requests>=2.31.0
+urllib3>=2.0.0
+
+# Optional - WebDriver Management
+webdriver-manager>=4.0.0 
