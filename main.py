@@ -3,6 +3,7 @@ import os
 import time
 import logging
 import argparse
+from tqdm import tqdm
 
 from freefloScraper import FreefloScraper
 from freefloStyleScraper import FreefloStyleScraper
@@ -16,6 +17,9 @@ parser = argparse.ArgumentParser(
     description="Run the scraper with optional debug mode."
 )
 parser.add_argument("-d", "--debug", action="store_true", help="Enable debug mode")
+parser.add_argument(
+    "-n", "--no-headless", action="store_true", help="Disable headless mode"
+)
 args = parser.parse_args()
 
 # Set headless mode and logging based on debug flag
@@ -32,12 +36,13 @@ def process_lexica_results(freeflo_results):
     max_retries = 3
 
     lexica_scraper = None
-    for attempt in range(max_retries):
+    logging.info("Starting Lexica results processing...")
+    for attempt in tqdm(range(max_retries), desc="Processing Lexica results"):
         try:
             lexica_scraper = LexicaScraper(image_limit=10, headless=HEADLESS_MODE)
 
             # Process each FreeFlo style
-            for style in freeflo_results:
+            for style in tqdm(freeflo_results, desc="Processing styles"):
                 style_name = style["style_name"]
                 style_link = style["style_link"]
 
@@ -57,7 +62,9 @@ def process_lexica_results(freeflo_results):
                     lexica_results = lexica_scraper.search_and_scrape(search_query)
 
                     # Get up to 2 related images from Lexica results
-                    for lexica_item in lexica_results[:10]:
+                    for lexica_item in tqdm(
+                        lexica_results[:10], desc="Processing Lexica items"
+                    ):
                         image_data = {
                             "src": lexica_item["image_url"],
                             "alt": style_name,
@@ -105,27 +112,35 @@ def process_lexica_results(freeflo_results):
 
 
 if __name__ == "__main__":
+    logging.info("Initializing FreefloScraper...")
     scraper = FreefloScraper(headless=HEADLESS_MODE)
     try:
         # Example search term
+        logging.info("Starting search and scrape with FreefloScraper...")
         results = scraper.search_and_scrape(
             "adventure video game immersive quests fantasy adventure game"
         )
+        logging.info("Saving FreefloScraper results...")
         scraper.save_results()
         style_scraper = FreefloStyleScraper(headless=HEADLESS_MODE)
+        logging.info("Scraping styles from FreefloScraper results...")
         style_scraper.scrape_from_results()
 
         # Process Lexica results
         freeflo_results = []
         if os.path.exists("freeflo_results.json"):
+            logging.info("Loading Freeflo results from file...")
             with open("freeflo_results.json", "r") as f:
                 freeflo_results = json.load(f)
 
+        logging.info("Processing Lexica results...")
         combined_results = process_lexica_results(freeflo_results)
         logging.info(
             f"Found {len(combined_results)} styles with combined Lexica results"
         )
 
+    except KeyboardInterrupt:
+        logging.info("Shutdown requested...exiting")
     finally:
+        logging.info("Closing FreefloScraper...")
         scraper.close()
-

@@ -1,11 +1,14 @@
 import { Upload, FileJson, Images } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonInput } from "./JsonInput";
+import { useStyleStore } from "../store/styleStore";
+import { Style } from "../types/style";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [showJsonInput, setShowJsonInput] = useState(false);
+  const setStyles = useStyleStore((state) => state.setStyles);
 
   return (
     <nav className="border-b bg-white shadow-sm">
@@ -51,6 +54,7 @@ export const Navbar = () => {
                 reader.onload = (e) => {
                   try {
                     const json = JSON.parse(e.target?.result as string);
+                    setStyles(json as Style[]);
                     // Handle JSON data
                   } catch (error) {
                     console.error("Error parsing JSON:", error);
@@ -66,3 +70,4 @@ export const Navbar = () => {
     </nav>
   );
 };
+
