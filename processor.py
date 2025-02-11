@@ -489,12 +489,7 @@ Discipline is freedom. And those who master it… master life.
         print("Creating video with captions...")
         processor.create_video("processed_content.json", "output_with_captions.mp4")
         
-        # Print results
-        for i, segment in enumerate(processed_segments, 1):
-            print(f"\nSegment {i}:")
-            print(f"Text: {segment.text}")
-            print(f"Keywords: {segment.keywords}")
-            print(f"Number of images: {len(segment.images)}")
+        print("Video created successfully: output_with_captions.mp4")
         
     except Exception as e:
         print(f"Error in main: {str(e)}")
