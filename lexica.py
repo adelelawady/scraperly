@@ -5,6 +5,8 @@ This is a scraper for Lexica.art to extract image information and metadata
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,6 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
 import urllib.parse
+import os
 
 class LexicaScraper:
     def __init__(self, image_limit=10, headless=True):
@@ -22,18 +25,33 @@ class LexicaScraper:
         
     def initialize_driver(self):
         """Initialize or reinitialize the Chrome driver"""
-        options = webdriver.ChromeOptions()
-        if self.headless:
-            options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--disable-software-rasterizer')
-        options.add_argument('--disable-extensions')
-        options.add_argument('--disable-logging')
-        self.driver = webdriver.Chrome(options=options)
-        self.driver.set_window_size(1920, 1080)
-        
+        try:
+            options = Options()
+            if self.headless:
+                options.add_argument('--headless=new')  # Updated headless argument
+            options.add_argument('--disable-gpu')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-software-rasterizer')
+            options.add_argument('--disable-extensions')
+            options.add_argument('--disable-logging')
+            options.add_argument('--remote-debugging-port=9222')  # Add debugging port
+            
+            # Try to create Chrome driver directly
+            try:
+                self.driver = webdriver.Chrome(options=options)
+            except Exception as chrome_error:
+                print(f"Direct Chrome initialization failed: {chrome_error}")
+                # Fallback to basic initialization
+                self.driver = webdriver.Chrome()
+            
+            self.driver.set_window_size(1920, 1080)
+            
+        except Exception as e:
+            print(f"Error initializing Chrome driver: {str(e)}")
+            print("Please make sure Chrome browser is installed on your system")
+            raise
+
     def ensure_driver_active(self):
         """Ensure the driver is active, reinitialize if necessary"""
         try:

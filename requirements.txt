@@ -1,10 +1,23 @@
-# Web Scraping
-selenium>=4.10.0
-beautifulsoup4>=4.12.0
+# Core dependencies
+requests==2.31.0
+urllib3==2.0.0
 
-# Utility
-requests>=2.31.0
-urllib3>=2.0.0
+# Web Scraping (for lexica.py)
+selenium==4.15.2
+beautifulsoup4==4.12.0
 
-# Optional - WebDriver Management
-webdriver-manager>=4.0.0
+# Audio/Video Processing (for processor.py)
+numpy==1.24.3
+Pillow==9.5.0
+decorator==4.4.2
+imageio==2.31.1
+imageio-ffmpeg==0.4.8
+proglog==0.1.10
+tqdm==4.65.0
+moviepy==2.0.0.dev2
+gTTS==2.3.1
+pydub==0.25.1
+
+# AI Providers (for providers.py)
+openai==1.0.0  # Optional - for OpenAI provider
+anthropic==0.3.0  # Optional - for Anthropic provider

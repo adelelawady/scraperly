@@ -1,8 +1,8 @@
 from typing import List, Dict, Any
 import json
 from dataclasses import dataclass
-from .providers import get_ai_provider
-from .scraper import LexicaScraper
+from providers import get_ai_provider
+from lexica import LexicaScraper
 import random
 from gtts import gTTS
 from pydub import AudioSegment
