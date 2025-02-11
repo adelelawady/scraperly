@@ -1,4 +1,4 @@
-from .processor import ContentProcessor, LexicaScraper
+from scraperly import ContentProcessor
 import json
 
 def main():
@@ -28,13 +28,6 @@ def main():
         # Create video with captions
         print("Creating video...")
         processor.create_video("processed_content.json", "output_with_captions.mp4")
-        
-        # Print results
-        for i, segment in enumerate(processed_segments, 1):
-            print(f"\nSegment {i}:")
-            print(f"Text: {segment.text}")
-            print(f"Keywords: {segment.keywords}")
-            print(f"Number of images: {len(segment.images)}")
         
     except Exception as e:
         print(f"Error in main: {str(e)}")

@@ -19,9 +19,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
+*.json
 # Virtual Environment
 venv/
+venv_lib/
 env/
 ENV/
 .env
@@ -47,39 +48,19 @@ geckodriver.exe
 # OS specific
 .DS_Store
 Thumbs.db
-desktop.ini 
+desktop.ini
 
+# Project specific ignores
+old/
+basic_usage.py
 
-
+# Cache files
+*.cache
+.cache/
+scraperly/**/*.cache
+scraperly/**/__pycache__/
 
 # Style Gallery Explorer
-# Logs
-style-gallery-explorer-main/logs
-*.log
-style-gallery-explorer-main/npm-debug.log*
-style-gallery-explorer-main/yarn-debug.log*
-style-gallery-explorer-main/yarn-error.log*
-style-gallery-explorer-main/pnpm-debug.log*
-style-gallery-explorer-main/lerna-debug.log*
-
-style-gallery-explorer-main/node_modules
-style-gallery-explorer-main/dist
-style-gallery-explorer-main/dist-ssr
-style-gallery-explorer-main/*.local
-
-# Editor directories and files
-style-gallery-explorer-main/.vscode/*
-style-gallery-explorer-main/.vscode/extensions.json
-style-gallery-explorer-main/.idea
-style-gallery-explorer-main/.DS_Store
-style-gallery-explorer-main/*.suo
-style-gallery-explorer-main/*.ntvs*
-style-gallery-explorer-main/*.njsproj
-style-gallery-explorer-main/*.sln
-style-gallery-explorer-main/*.sw?
-
-# Explicitly allow lib directory in style-gallery-explorer-main
-!style-gallery-explorer-main/src/lib/
-
+style-gallery-explorer-main/
 *.mp4
 *.mp3
