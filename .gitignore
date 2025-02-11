@@ -80,3 +80,6 @@ style-gallery-explorer-main/*.sw?
 
 # Explicitly allow lib directory in style-gallery-explorer-main
 !style-gallery-explorer-main/src/lib/
+
+*.mp4
+*.mp3
