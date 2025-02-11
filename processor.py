@@ -1,8 +1,8 @@
 from typing import List, Dict, Any
 import json
 from dataclasses import dataclass
-from ai_providers import get_ai_provider
-from LexicaScraper import LexicaScraper
+from .providers import get_ai_provider
+from .scraper import LexicaScraper
 import random
 from gtts import gTTS
 from pydub import AudioSegment
@@ -12,7 +12,6 @@ import requests
 from io import BytesIO
 from PIL import Image
 import numpy as np
-from captacity_clipify import add_captions
 
 @dataclass
 class ContentSegment:
@@ -335,27 +334,6 @@ class ContentProcessor:
             print(f"Error creating audio: {e}")
             return None
 
-    def add_captions_to_video(self, input_video: str, output_video: str, segments: List[Dict]):
-        """Add captions to video using Captacity Clipify"""
-        print("Adding captions to video...")
-        
-        try:
-            # Initialize Captacity Clipify
-            
-            # Add captions to video using the simple method
-            add_captions(
-                video_file=input_video,
-                output_file=output_video,
-                position="bottom",
-                font_size=50
-            )
-            
-            print(f"Captions added successfully: {output_video}")
-            
-        except Exception as e:
-            print(f"Error adding captions: {e}")
-            raise
-
     def create_video(self, json_file: str, output_file: str = "output.mp4"):
         """Create video from processed content with captions"""
         print("Creating video...")
@@ -441,7 +419,7 @@ class ContentProcessor:
                 
                 # Write final video with higher quality settings
                 final_video.write_videofile(
-                    temp_video,
+                    output_file,
                     fps=30,
                     codec='libx264',
                     audio_codec='aac',
@@ -459,9 +437,6 @@ class ContentProcessor:
                 # Remove temporary audio file
                 if os.path.exists("full_narration.mp3"):
                     os.remove("full_narration.mp3")
-                
-                # Add captions to the video
-                self.add_captions_to_video(temp_video, output_file, segments)
                 
             except Exception as e:
                 print(f"Error creating final video: {e}")
@@ -486,11 +461,11 @@ def main():
 In a world drowning in distractions, where convenience is worshiped, and effort is underestimated… one silent force separates the extraordinary from the forgotten.
 Not talent. Not luck. But self-discipline.
 Every moment, you face a choice. Give in… or rise above.
-Discipline isn’t about punishment. It’s about power. Your power. The ability to command your mind when comfort tries to steal your future.
-Success isn’t built on motivation—it fades. It’s built on habits. Rituals. A war fought in the shadows of your daily choices.
+Discipline isn't about punishment. It's about power. Your power. The ability to command your mind when comfort tries to steal your future.
+Success isn't built on motivation—it fades. It's built on habits. Rituals. A war fought in the shadows of your daily choices.
 Who do you choose to be? The one who dreams… or the one who does?
-The world won’t give you discipline. You must forge it. Build it like steel in the fire of resistance. Burn away weakness. Temper your will. Become relentless.
-Most people live their lives in a loop, repeating yesterday’s mistakes. But you? You break the cycle. Because you know something they don’t...
+The world won't give you discipline. You must forge it. Build it like steel in the fire of resistance. Burn away weakness. Temper your will. Become relentless.
+Most people live their lives in a loop, repeating yesterday's mistakes. But you? You break the cycle. Because you know something they don't...
 Discipline is freedom. And those who master it… master life.
     """
     
