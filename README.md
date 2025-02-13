@@ -11,7 +11,7 @@
   <a href="https://pypi.org/project/scraperly/">
     <img src="https://img.shields.io/pypi/pyversions/scraperly.svg" alt="Python versions">
   </a>
-  <a href="https://github.com/adelelawady/scraperly/blob/main/LICENSE">
+  <a href="https://github.com/adelelawady/scraperly/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/adelelawady/scraperly.svg" alt="License">
   </a>
   <a href="https://github.com/adelelawady/scraperly/stargazers">
