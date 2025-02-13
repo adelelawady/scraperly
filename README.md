@@ -1,5 +1,9 @@
 # Scraperly
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d2acb889-33a8-4eed-9c24-18b4693e5cfc" alt="Logo" width="200">
+</p>
+
 Scraperly is a Python package that combines web scraping capabilities with AI-powered content processing. It provides tools for scraping images from Lexica.art and processing content with various AI providers to create AI-narrated videos with matching visuals.
 
 ## Features
