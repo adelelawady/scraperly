@@ -22,14 +22,19 @@ class ContentSegment:
 class ContentProcessor:
     def __init__(
         self,
+        content: str = None,
         provider_name: str = "hyperbolic",
         api_key: str = None,
         model: str = "meta-llama/Llama-3.3-70B-Instruct",
         max_images_per_segment: int = 2
     ):
         self.ai_provider = get_ai_provider(provider_name, api_key, model)
-        self.scraper = LexicaScraper(image_limit=5, headless=True)
+        self.scraper = LexicaScraper(image_limit=max_images_per_segment+1, headless=True)
         self.max_images_per_segment = max_images_per_segment
+        
+        # Process content if provided
+        if content:
+            self.process_content(content)
 
     def _split_into_segments(self, content: str) -> List[str]:
         """Use AI to split content into logical segments"""
@@ -453,51 +458,4 @@ class ContentProcessor:
                 try:
                     os.remove(temp_video)
                 except:
-                    pass
-
-def main():
-    # Example usage
-    content = """
-In a world drowning in distractions, where convenience is worshiped, and effort is underestimated… one silent force separates the extraordinary from the forgotten.
-Not talent. Not luck. But self-discipline.
-Every moment, you face a choice. Give in… or rise above.
-Discipline isn't about punishment. It's about power. Your power. The ability to command your mind when comfort tries to steal your future.
-Success isn't built on motivation—it fades. It's built on habits. Rituals. A war fought in the shadows of your daily choices.
-Who do you choose to be? The one who dreams… or the one who does?
-The world won't give you discipline. You must forge it. Build it like steel in the fire of resistance. Burn away weakness. Temper your will. Become relentless.
-Most people live their lives in a loop, repeating yesterday's mistakes. But you? You break the cycle. Because you know something they don't...
-Discipline is freedom. And those who master it… master life.
-    """
-    
-    try:
-        # Initialize processor with your API key
-        processor = ContentProcessor(
-            provider_name="hyperbolic",
-            api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZGVsNTBhbGk1MEBnbWFpbC5jb20iLCJpYXQiOjE3Mzg1MTE1Mzd9.q3lmzpYKd5EZTaN2YOf6wKwwUTqAWafcphte5oClzQk",
-            max_images_per_segment=2
-        )
-        
-        # Process the content
-        print("Processing content...")
-        processed_segments = processor.process_content(content)
-        
-        # Save results with audio and timing information
-        print("Saving results with audio timing...")
-        processor.save_processed_content(processed_segments, "processed_content.json")
-        
-        # Create video with captions
-        print("Creating video with captions...")
-        processor.create_video("processed_content.json", "output_with_captions.mp4")
-        
-        print("Video created successfully: output_with_captions.mp4")
-        
-    except Exception as e:
-        print(f"Error in main: {str(e)}")
-        import traceback
-        traceback.print_exc()
-    finally:
-        if 'processor' in locals():
-            processor.scraper.close()
-
-if __name__ == "__main__":
-    main() 
+                    pass 

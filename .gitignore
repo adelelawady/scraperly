@@ -15,11 +15,12 @@ lib64/
 parts/
 sdist/
 var/
+basic_usage.py
 wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-*.json
+
 # Virtual Environment
 venv/
 venv_lib/
@@ -37,30 +38,26 @@ ENV/
 .pydevproject
 .settings/
 
-# Project specific
-*.log
-chromedriver
-chromedriver.exe
-geckodriver
-geckodriver.exe
-!requirements.json
-
 # OS specific
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Project specific ignores
-old/
-basic_usage.py
-
-# Cache files
+# Project specific
+*.log
+*.json
+!requirements.json
 *.cache
 .cache/
-scraperly/**/*.cache
-scraperly/**/__pycache__/
-
-# Style Gallery Explorer
+chromedriver
+chromedriver.exe
+geckodriver
+geckodriver.exe
+old/
 style-gallery-explorer-main/
 *.mp4
 *.mp3
+
+# Remove redundant entries since they're covered by __pycache__/ and *.cache above
+# scraperly/**/*.cache
+# scraperly/**/__pycache__/
