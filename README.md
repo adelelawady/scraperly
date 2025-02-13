@@ -4,13 +4,34 @@
   <img src="https://github.com/user-attachments/assets/d2acb889-33a8-4eed-9c24-18b4693e5cfc" alt="Logo" width="200">
 </p>
 
-Scraperly is a Python package that combines web scraping capabilities with AI-powered content processing. It provides tools for scraping images from Lexica.art and processing content with various AI providers to create AI-narrated videos with matching visuals.
+<p align="center">
+  <a href="https://pypi.org/project/scraperly/">
+    <img src="https://img.shields.io/pypi/v/scraperly.svg" alt="PyPI version">
+  </a>
+  <a href="https://pypi.org/project/scraperly/">
+    <img src="https://img.shields.io/pypi/pyversions/scraperly.svg" alt="Python versions">
+  </a>
+  <a href="https://github.com/adelelawady/scraperly/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/adelelawady/scraperly.svg" alt="License">
+  </a>
+  <a href="https://github.com/adelelawady/scraperly/stargazers">
+    <img src="https://img.shields.io/github/stars/adelelawady/scraperly.svg" alt="GitHub stars">
+  </a>
+  <a href="https://github.com/adelelawady/scraperly/issues">
+    <img src="https://img.shields.io/github/issues/adelelawady/scraperly.svg" alt="GitHub issues">
+  </a>
+  <a href="https://pepy.tech/project/scraperly">
+    <img src="https://static.pepy.tech/badge/scraperly" alt="Downloads">
+  </a>
+</p>
+
+Scraperly is a Python package that combines web scraping capabilities with AI-powered content processing. It provides tools for scraping existing AI-generated images from Lexica.art (note: images are not generated, only scraped from existing ones) and processing content with various AI providers to create AI-narrated videos with matching visuals.
 
 ## Features
 
 - Text-to-video content generation
 - Support for multiple AI providers (Hyperbolic, OpenAI, Anthropic, Ollama)
-- Automatic image scraping from Lexica.art
+- Image scraping from Lexica.art's existing AI-generated image database (no image generation)
 - Text-to-speech narration
 - Automated video creation
 - Customizable image count per segment
@@ -40,6 +61,25 @@ Or install from source:
    ```bash
    pip install -e ".[ai]"
    ```
+
+
+## Input/Output Examples
+
+### Example : Story Content
+**Input Text:**
+```text
+The wind howled through the abandoned streets as Elias tightened his coat around his shoulders. The city had once been alive, filled with laughter and the hum of everyday life, but now only the echoes of the past remained. He stepped over the broken pavement, eyes scanning for any sign of movement. The sun was setting, casting long shadows against the crumbling buildings. He needed to find shelter before nightfall. There was always something lurking in the darkness.
+His footsteps echoed as he approached an old bookstore, its windows shattered, pages of forgotten stories scattered across the floor. He pushed the door open carefully, the hinges groaning in protest. Dust hung thick in the air, disturbed only by his breath. Shelves stood like silent sentinels, their contents long since plundered. He made his way toward the back, past fallen books and overturned chairs, and found what he was looking for. A hidden door, half-concealed behind a collapsed shelf.
+With effort, he pushed through, stepping into a smaller room, untouched by the chaos outside. A single lantern sat on a desk, its wick dry but intact. He rummaged through his pack, pulling out a match, and struck it against the rough surface of his sleeve. The flame flickered to life, casting dancing shadows along the walls. He exhaled slowly, the brief warmth comforting.
+He lowered himself into an old chair, feeling the exhaustion settle into his bones. He had been walking for days, searching for something he wasn't sure existed anymore. A place safe from the nightmares that roamed the world, from the hunger that gnawed at his ribs, from the memories that refused to fade.
+Outside, the wind picked up again, rattling the broken glass and whispering secrets through the ruins. He closed his eyes, listening, waiting, knowing that soon, he would have to move again.
+```
+
+**Output Video:**
+[Video sample will be added]
+
+
+Note: These examples will be updated with actual content and video samples.
 
 ## Quick Start
 
@@ -97,9 +137,9 @@ print(f"Processed content saved at: {result['json_path']}")
 
 This example will:
 1. Process the input text into segments
-2. Scrape relevant images from Lexica.art
+2. Scrape relevant existing AI-generated images from Lexica.art (no new images are generated)
 3. Generate text-to-speech narration
-4. Create a video with the images and narration
+4. Create a video with the scraped images and narration
 
 ## Supported AI Providers
 
@@ -195,3 +235,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Support
 
 For support, please open an issue on the GitHub repository or contact the author directly.
+
+

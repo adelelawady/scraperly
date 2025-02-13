@@ -53,9 +53,7 @@ def scraperly(
             # Create video with captions
             print("Creating video with captions...")
             processor.create_video(output_json_path, output_video_path)
-            
-            print(f"Video created successfully: {output_video_path}")
-        
+                    
         return processor
     
     except Exception as e:

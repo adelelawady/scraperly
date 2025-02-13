@@ -49,6 +49,9 @@ class ContentProcessor:
 
         try:
             response = self.ai_provider.get_response(prompt)
+            if not response or 'choices' not in response:
+                raise ValueError("Invalid AI response format")
+            
             response_content = response['choices'][0]['message']['content']
             
             # Clean up the response content to ensure it's valid JSON
@@ -99,6 +102,9 @@ class ContentProcessor:
 
         try:
             response = self.ai_provider.get_response(prompt)
+            if not response or 'choices' not in response:
+                raise ValueError("Invalid AI response format")
+            
             response_content = response['choices'][0]['message']['content']
             
             # Clean up the response content
@@ -178,28 +184,60 @@ class ContentProcessor:
 
     def process_content(self, content: str) -> List[ContentSegment]:
         """Process content into segments with keywords and images"""
-        # Split content into segments
-        segments = self._split_into_segments(content)
-        
-        processed_segments = []
-        
-        for segment in segments:
-            # Generate keywords for the segment
-            keywords = self._generate_keywords(segment)
+        try:
+            # Split content into segments
+            segments = self._split_into_segments(content)
+            if not segments:
+                print("Warning: No segments generated, using full content as single segment")
+                segments = [content]
             
-            # Get images based on keywords
-            images = self._get_images_for_keywords(keywords)
+            processed_segments = []
             
-            # Create segment object
-            processed_segment = ContentSegment(
-                text=segment,
-                keywords=keywords,
-                images=images
-            )
+            for segment in segments:
+                try:
+                    # Generate keywords for the segment
+                    keywords = self._generate_keywords(segment)
+                    if not keywords:
+                        keywords = [
+                            "high quality digital illustration",
+                            "cinematic composition",
+                            "professional photography",
+                            "detailed artwork",
+                            "dramatic scene"
+                        ]
+                    
+                    # Get images based on keywords
+                    images = self._get_images_for_keywords(keywords)
+                    
+                    # Create segment object
+                    processed_segment = ContentSegment(
+                        text=segment,
+                        keywords=keywords,
+                        images=images
+                    )
+                    
+                    processed_segments.append(processed_segment)
+                    
+                except Exception as e:
+                    print(f"Error processing segment: {str(e)}")
+                    # Add segment with fallback values
+                    processed_segment = ContentSegment(
+                        text=segment,
+                        keywords=["high quality digital art"],
+                        images=[]
+                    )
+                    processed_segments.append(processed_segment)
             
-            processed_segments.append(processed_segment)
-        
-        return processed_segments
+            return processed_segments
+            
+        except Exception as e:
+            print(f"Error in process_content: {str(e)}")
+            # Return single segment with full content as fallback
+            return [ContentSegment(
+                text=content,
+                keywords=["high quality digital art"],
+                images=[]
+            )]
 
     def generate_speech_and_timing(self, processed_segments: List[ContentSegment]) -> List[Dict]:
         """
