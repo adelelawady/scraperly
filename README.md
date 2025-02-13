@@ -32,6 +32,7 @@ Scraperly is your all-in-one Python toolkit for creating engaging AI-powered vid
 ## 📚 Table of Contents
 - [✨ Features](#-features)
 - [🚀 Quick Start](#-quick-start)
+- [🎯 Input/Output Examples](#-input-output-examples)
 - [⚙️ Installation](#️-installation)
 - [🎯 Use Cases](#-use-cases)
 - [🛠️ Advanced Usage](#️-advanced-usage)
@@ -63,6 +64,25 @@ result = scraperly(
     model="gpt-4"
 )
 ```
+
+## 📝 Input/Output Examples
+
+### Input Text
+```text
+The wind howled through the abandoned streets as Elias tightened his coat around his shoulders. The city had once been alive, filled with laughter and the hum of everyday life, but now only the echoes of the past remained. He stepped over the broken pavement, eyes scanning for any sign of movement. The sun was setting, casting long shadows against the crumbling buildings. He needed to find shelter before nightfall. There was always something lurking in the darkness.
+
+His footsteps echoed as he approached an old bookstore, its windows shattered, pages of forgotten stories scattered across the floor. He pushed the door open carefully, the hinges groaning in protest. Dust hung thick in the air, disturbed only by his breath. Shelves stood like silent sentinels, their contents long since plundered. He made his way toward the back, past fallen books and overturned chairs, and found what he was looking for. A hidden door, half-concealed behind a collapsed shelf.
+
+With effort, he pushed through, stepping into a smaller room, untouched by the chaos outside. A single lantern sat on a desk, its wick dry but intact. He rummaged through his pack, pulling out a match, and struck it against the rough surface of his sleeve. The flame flickered to life, casting dancing shadows along the walls. He exhaled slowly, the brief warmth comforting.
+
+He lowered himself into an old chair, feeling the exhaustion settle into his bones. He had been walking for days, searching for something he wasn’t sure existed anymore. A place safe from the nightmares that roamed the world, from the hunger that gnawed at his ribs, from the memories that refused to fade.
+
+Outside, the wind picked up again, rattling the broken glass and whispering secrets through the ruins. He closed his eyes, listening, waiting, knowing that soon, he would have to move again.
+```
+
+### Output Video
+https://github.com/user-attachments/assets/6d487c5d-685d-401f-81f0-adef608cd0a1
+
 
 ## ⚙️ Installation
 
