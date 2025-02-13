@@ -1,8 +1,13 @@
 from setuptools import setup, find_packages
+import io
+
+# Update the README reading part
+with io.open("README.md", encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
     name="scraperly",
-    version="2.0.0",
+    version="2.0.1",
     packages=find_packages(),
     install_requires=[
         # Core dependencies
@@ -35,7 +40,7 @@ setup(
     author="adelelawady",
     author_email="adel50ali5@gmail.com",
     description="A tool for processing content into AI-generated videos",
-    long_description=open("README.md").read(),
+    long_description=long_description,
     long_description_content_type="text/markdown",
     keywords="ai, video, content, processing",
     url="https://github.com/adelelawady/scraperly",
